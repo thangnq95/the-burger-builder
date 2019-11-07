@@ -7,13 +7,27 @@ const input = (props) => {
 
     switch (props.elementType) {
         case 'input':
-            inputElement = <input className={classes.InputElement} {...props.elementConfig}  value=""/>;
+            inputElement = <input className={classes.InputElement} {...props.elementConfig}/>;
             break;
         case 'textarea':
-            inputElement = <textarea className={classes.InputElement} {...props.elementConfig} value=""/>;
+            inputElement = <textarea className={classes.InputElement} {...props.elementConfig}/>;
+            break;
+        case 'select':
+            inputElement = (
+                <select 
+                className={classes.InputElement} 
+                value={props.value}
+                onChange={props.changed}>
+                    {props.elementConfig.options.map(opt => (
+                        <option key={opt.value} value={opt.value}>
+                            {opt.displayValue}
+                        </option>
+                    ))}
+                </select>
+            );
             break;
         default:
-            inputElement = <input className={classes.InputElement} {...props.elementConfig} value=""/>;
+            inputElement = <input className={classes.InputElement} {...props.elementConfig} />;
     }
 
     return (
